@@ -10,7 +10,6 @@ function App() {
       <GlobalStyle />
       <Wrapper>
         <Timer />
-        <Controls />
       </Wrapper>
     </Fragment>
   );
