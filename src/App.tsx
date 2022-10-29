@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import GlobalStyle from "./globalStyles";
 import styled from "styled-components";
 import Timer from "./Timer";
-import Controls from "./Controls";
 
 function App() {
   return (
