@@ -85,8 +85,8 @@ export const Timer: React.FC = () => {
         >
           {timerRuning ? <IconPause /> : <IconPlay />}
         </Start>
-        <Next>
-          <IconNext onClick={skipTimer} />
+        <Next onClick={skipTimer}>
+          <IconNext />
         </Next>
       </MenuButtons>
     </Container>
