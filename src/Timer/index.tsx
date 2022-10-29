@@ -18,12 +18,14 @@ import {
 
 export const Timer: React.FC = () => {
   const interval: any = React.useRef();
-  const breakTime: string = "00:02";
-  const focusTime: string = "00:03";
+  const focusTime: string = "25:00";
+  const breakTime: string = "05:00";
+  const longBreakTime: string = "10:00";
 
   const [state, setState] = useState("Focus");
   const [time, setTime] = useState(focusTime);
   const [timerRuning, setTimerRuning] = useState(false);
+  const [counting, setCounting] = useState(1);
 
   const timeArray: string[] | undefined = time?.split(":");
   const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
@@ -55,12 +57,19 @@ export const Timer: React.FC = () => {
 
   const skipTimer = () => {
     if (state == "Focus") {
-      setTime(breakTime);
-      setState("Short Break");
+      if (counting === 4) {
+        setState("Long Break");
+        setTime(longBreakTime);
+        setCounting(0);
+      } else {
+        setState("Short Break");
+        setTime(breakTime);
+      }
     }
-    if (state == "Short Break") {
+    if (state == "Short Break" || state == "Long Break") {
       setTime(focusTime);
       setState("Focus");
+      setCounting(counting + 1);
     }
     stopTimer();
   };
