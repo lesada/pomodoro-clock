@@ -20,10 +20,10 @@ export const Timer: React.FC = () => {
 
   const [time, setTime] = useState("25:00");
   const [timerRuning, setTimerRuning] = useState(false);
+  const timeArray: string[] | undefined = time?.split(":");
+  const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
 
   const startTimer = () => {
-    const timeArray: string[] | undefined = time?.split(":");
-    const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
     setTimerRuning(true);
 
     let timer: number = duration,
@@ -45,8 +45,13 @@ export const Timer: React.FC = () => {
   };
 
   const stopTimer = () => {
-    setTimerRuning(false);
     clearInterval(interval.current);
+    setTimerRuning(false);
+  };
+
+  const skipTimer = () => {
+    stopTimer();
+    setTime("5:00");
   };
 
   return (
@@ -70,7 +75,7 @@ export const Timer: React.FC = () => {
           {timerRuning ? <IconPause /> : <IconPlay />}
         </Start>
         <Next>
-          <IconNext />
+          <IconNext onClick={skipTimer} />
         </Next>
       </MenuButtons>
     </Container>
