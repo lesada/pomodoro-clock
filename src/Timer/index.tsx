@@ -77,7 +77,7 @@ export const Timer: React.FC = () => {
   return (
     <Container>
       <State>
-        {state ? <IconWorking /> : <IconBreak />}
+        {state == "Focus" ? <IconWorking /> : <IconBreak />}
         {state}
       </State>
       <CountDown className="countDown">{time}</CountDown>
