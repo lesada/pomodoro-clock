@@ -39,7 +39,7 @@ export const Timer: React.FC = () => {
 
       setTime(minutes + ":" + seconds);
       if (--timer < 0) {
-        clearInterval(interval);
+        skipTimer();
       }
     }, 1000);
   };
