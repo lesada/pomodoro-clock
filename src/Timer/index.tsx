@@ -20,7 +20,6 @@ export const Timer: React.FC = () => {
   const startTimer = () => {
     let currentTime: string | undefined =
       document.querySelector(".countDown")?.innerHTML;
-    console.log(document.querySelector(".countDown"));
     const timeArray: string[] | undefined = currentTime?.split(":");
     const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
 
