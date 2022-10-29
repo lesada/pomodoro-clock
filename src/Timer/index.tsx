@@ -16,6 +16,8 @@ import {
 } from "./styles";
 
 export const Timer: React.FC = () => {
+  const interval: any = React.useRef();
+
   const [time, setTime] = useState("25:00");
   const [timerRuning, setTimerRuning] = useState(false);
 
@@ -28,7 +30,7 @@ export const Timer: React.FC = () => {
       minutes,
       seconds;
 
-    let countdown = setInterval(function () {
+    interval.current = setInterval(function () {
       minutes = Math.floor(timer / 60);
       seconds = Math.floor(timer % 60);
 
@@ -37,13 +39,14 @@ export const Timer: React.FC = () => {
 
       setTime(minutes + ":" + seconds);
       if (--timer < 0) {
-        clearInterval(countdown);
+        clearInterval(interval);
       }
     }, 1000);
   };
 
   const stopTimer = () => {
     setTimerRuning(false);
+    clearInterval(interval.current);
   };
 
   return (
