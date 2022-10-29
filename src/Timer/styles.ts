@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Brain } from "@styled-icons/boxicons-regular/Brain";
+import { Coffee } from "@styled-icons/boxicons-solid/Coffee";
 import { ThreeDots } from "@styled-icons/bootstrap/ThreeDots";
 import { SkipNext } from "@styled-icons/material-rounded/SkipNext";
 import { Play } from "@styled-icons/fa-solid/Play";
@@ -28,7 +29,6 @@ export const State = styled.div`
   font-weight: 500;
   font-size: 24px;
 
-  width: 136px;
   height: 48px;
 
   background: #ff4c4c26;
@@ -50,7 +50,12 @@ export const CountDown = styled.h2`
   margin: 0;
 `;
 
-export const IconState = styled(Brain)`
+export const IconWorking = styled(Brain)`
+  width: 32px;
+  height: 32px;
+`;
+
+export const IconBreak = styled(Coffee)`
   width: 32px;
   height: 32px;
 `;

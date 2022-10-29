@@ -4,7 +4,8 @@ import {
   Container,
   State,
   CountDown,
-  IconState,
+  IconWorking,
+  IconBreak,
   Settings,
   MenuButtons,
   Start,
@@ -17,9 +18,13 @@ import {
 
 export const Timer: React.FC = () => {
   const interval: any = React.useRef();
+  const breakTime: string = "00:02";
+  const workingTime: string = "00:03";
 
-  const [time, setTime] = useState("25:00");
+  const [state, setState] = useState("Focus");
+  const [time, setTime] = useState(workingTime);
   const [timerRuning, setTimerRuning] = useState(false);
+
   const timeArray: string[] | undefined = time?.split(":");
   const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
 
@@ -29,7 +34,6 @@ export const Timer: React.FC = () => {
     let timer: number = duration,
       minutes,
       seconds;
-
     interval.current = setInterval(function () {
       minutes = Math.floor(timer / 60);
       seconds = Math.floor(timer % 60);
@@ -50,15 +54,22 @@ export const Timer: React.FC = () => {
   };
 
   const skipTimer = () => {
+    if (state == "Focus") {
+      setTime(breakTime);
+      setState("Short Break");
+    }
+    if (state == "Short Break") {
+      setTime(workingTime);
+      setState("Working");
+    }
     stopTimer();
-    setTime("5:00");
   };
 
   return (
     <Container>
       <State>
-        <IconState />
-        Focus
+        {state ? <IconWorking /> : <IconBreak />}
+        {state}
       </State>
       <CountDown className="countDown">{time}</CountDown>
       <MenuButtons>
