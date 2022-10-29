@@ -19,10 +19,10 @@ import {
 export const Timer: React.FC = () => {
   const interval: any = React.useRef();
   const breakTime: string = "00:02";
-  const workingTime: string = "00:03";
+  const focusTime: string = "00:03";
 
   const [state, setState] = useState("Focus");
-  const [time, setTime] = useState(workingTime);
+  const [time, setTime] = useState(focusTime);
   const [timerRuning, setTimerRuning] = useState(false);
 
   const timeArray: string[] | undefined = time?.split(":");
@@ -59,8 +59,8 @@ export const Timer: React.FC = () => {
       setState("Short Break");
     }
     if (state == "Short Break") {
-      setTime(workingTime);
-      setState("Working");
+      setTime(focusTime);
+      setState("Focus");
     }
     stopTimer();
   };
