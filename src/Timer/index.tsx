@@ -4,7 +4,7 @@ import {
   Container,
   State,
   CountDown,
-  Icon,
+  IconState,
   Settings,
   MenuButtons,
   Start,
@@ -12,16 +12,17 @@ import {
   IconSettings,
   IconPlay,
   IconNext,
+  IconPause,
 } from "./styles";
 
 export const Timer: React.FC = () => {
   const [time, setTime] = useState("25:00");
+  const [timerRuning, setTimerRuning] = useState(false);
 
   const startTimer = () => {
-    let currentTime: string | undefined =
-      document.querySelector(".countDown")?.innerHTML;
-    const timeArray: string[] | undefined = currentTime?.split(":");
+    const timeArray: string[] | undefined = time?.split(":");
     const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
+    setTimerRuning(true);
 
     let timer: number = duration,
       minutes,
@@ -35,17 +36,20 @@ export const Timer: React.FC = () => {
       seconds = seconds < 10 ? "0" + seconds : seconds;
 
       setTime(minutes + ":" + seconds);
-
       if (--timer < 0) {
         clearInterval(countdown);
       }
     }, 1000);
   };
 
+  const stopTimer = () => {
+    setTimerRuning(false);
+  };
+
   return (
     <Container>
       <State>
-        <Icon />
+        <IconState />
         Focus
       </State>
       <CountDown className="countDown">{time}</CountDown>
@@ -55,10 +59,12 @@ export const Timer: React.FC = () => {
         </Settings>
         <Start
           onClick={() => {
-            startTimer();
+            {
+              timerRuning ? stopTimer() : startTimer();
+            }
           }}
         >
-          <IconPlay />
+          {timerRuning ? <IconPause /> : <IconPlay />}
         </Start>
         <Next>
           <IconNext />

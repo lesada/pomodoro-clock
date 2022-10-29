@@ -3,6 +3,7 @@ import { Brain } from "@styled-icons/boxicons-regular/Brain";
 import { ThreeDots } from "@styled-icons/bootstrap/ThreeDots";
 import { SkipNext } from "@styled-icons/material-rounded/SkipNext";
 import { Play } from "@styled-icons/fa-solid/Play";
+import { Pause } from "@styled-icons/fa-solid/Pause";
 
 const iconCSS = css`
   height: 32px;
@@ -49,7 +50,7 @@ export const CountDown = styled.h2`
   margin: 0;
 `;
 
-export const Icon = styled(Brain)`
+export const IconState = styled(Brain)`
   width: 32px;
   height: 32px;
 `;
@@ -86,6 +87,10 @@ export const IconSettings = styled(ThreeDots)`
 `;
 
 export const IconPlay = styled(Play)`
+  ${iconCSS}
+`;
+
+export const IconPause = styled(Pause)`
   ${iconCSS}
 `;
 
