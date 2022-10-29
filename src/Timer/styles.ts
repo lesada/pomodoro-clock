@@ -21,9 +21,9 @@ export const State = styled.div`
   width: 136px;
   height: 48px;
 
-  background: var(--background);
+  background: #ff4c4c26;
 
-  border: 2px solid var(--principal);
+  border: 2px solid #fff2f2;
   border-radius: 9999px;
 `;
 
