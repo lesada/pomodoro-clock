@@ -30,6 +30,17 @@ export const Timer: React.FC = () => {
   const [time, setTime] = useState(focusTime);
   const [timerRuning, setTimerRuning] = useState(false);
   const [counting, setCounting] = useState(1);
+  const [form, setForm] = useState({
+    darkMode: false,
+    autoResume: false,
+    sound: false,
+    notifications: false,
+
+    focusLength: 25,
+    pomodoros: 3,
+    shortBreak: 5,
+    longBreak: 10,
+  });
 
   const timeArray: string[] | undefined = time?.split(":");
   const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
@@ -104,7 +115,9 @@ export const Timer: React.FC = () => {
           <IconNext />
         </Next>
       </MenuButtons>
-      {settingsOpen && <Settings closeModal={() => setSettingsOpen(false)} />}
+      {settingsOpen && (
+        <Settings setForm={setForm} closeModal={() => setSettingsOpen(false)} />
+      )}
     </Container>
   );
 };

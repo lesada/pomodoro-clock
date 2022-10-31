@@ -4,13 +4,13 @@ import Input from "../Input";
 
 import { Modal, ModalHeader, IconClose, Option } from "./styles";
 import { useFormik } from "formik";
-import { Carousel } from "styled-icons/boxicons-regular";
 
 interface ISettings {
   closeModal: () => void;
+  setForm: any;
 }
 
-const Settings: React.FC<ISettings> = ({ closeModal }) => {
+const Settings: React.FC<ISettings> = ({ closeModal, setForm }) => {
   const { values, setFieldValue, handleSubmit } = useFormik({
     initialValues: {
       darkMode: false,
@@ -24,7 +24,7 @@ const Settings: React.FC<ISettings> = ({ closeModal }) => {
       longBreak: 10,
     },
     onSubmit: (val) => {
-      //
+      setForm(val);
     },
   });
 
