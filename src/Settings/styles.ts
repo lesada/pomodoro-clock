@@ -27,14 +27,14 @@ export const ModalHeader = styled.div`
     font-size: 24px;
     margin: 0;
     font-weight: 700;
-    padding: 24px;
+    margin: 24px;
   }
 `;
 
 export const IconClose = styled(Close)`
   width: 24px;
   height: 24px;
-  padding: 24px;
+  margin: 24px;
   cursor: pointer;
 `;
 
