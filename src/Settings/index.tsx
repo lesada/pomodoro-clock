@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "../Slider";
 import Input from "../Input";
 
@@ -9,6 +9,11 @@ interface ModalProps {
 }
 
 const Settings: React.FC<ModalProps> = ({ setSettingsOpen }) => {
+  const [darkMode, setDarkMode] = useState(false);
+  const [autoResume, setAutoResume] = useState(false);
+  const [sound, setSound] = useState(false);
+  const [notifications, setNotifications] = useState(false);
+
   return (
     <Modal>
       <ModalHeader>
@@ -17,7 +22,7 @@ const Settings: React.FC<ModalProps> = ({ setSettingsOpen }) => {
       </ModalHeader>
       <Option>
         <p>Dark Mode</p>
-        <Slider />
+        <Slider setIsChecked={setDarkMode} isChecked={darkMode} />
       </Option>
       <Option>
         <p>Focus length</p>
@@ -37,15 +42,15 @@ const Settings: React.FC<ModalProps> = ({ setSettingsOpen }) => {
       </Option>
       <Option>
         <p>Auto resume timer</p>
-        <Slider />
+        <Slider setIsChecked={setAutoResume} isChecked={autoResume} />
       </Option>
       <Option>
         <p>Sound</p>
-        <Slider />
+        <Slider setIsChecked={setSound} isChecked={sound} />
       </Option>
       <Option>
         <p>Notifications</p>
-        <Slider />
+        <Slider setIsChecked={setNotifications} isChecked={notifications} />
       </Option>
     </Modal>
   );

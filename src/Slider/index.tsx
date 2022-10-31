@@ -2,11 +2,20 @@ import React from "react";
 
 import { Container } from "./styles";
 
-const Slider: React.FC = () => {
+interface props {
+  setIsChecked: (settings: boolean) => void;
+  isChecked: boolean;
+}
+
+const Slider: React.FC<props> = ({ isChecked, setIsChecked }) => {
   return (
     <Container>
       <label className="switch">
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={() => setIsChecked(!isChecked)}
+        />
         <span className="slider round"></span>
       </label>
     </Container>
