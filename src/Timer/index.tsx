@@ -79,9 +79,7 @@ export const Timer: React.FC = () => {
   };
 
   const isModalOpen = () => {
-    if (setSettingsOpen) {
-      setSettingsOpen(true);
-    }
+    setSettingsOpen(true);
   };
 
   return (
@@ -106,7 +104,7 @@ export const Timer: React.FC = () => {
           <IconNext />
         </Next>
       </MenuButtons>
-      {settingsOpen ? <Settings setSettingsOpen={setSettingsOpen} /> : null}
+      {settingsOpen && <Settings closeModal={() => setSettingsOpen(false)} />}
     </Container>
   );
 };

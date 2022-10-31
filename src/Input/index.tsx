@@ -8,15 +8,27 @@ import {
   DownIcon,
 } from "./styles";
 
-const Input: React.FC = () => {
+interface IInput {
+  value: number;
+  onChange: (value: number) => void;
+}
+
+const Input: React.FC<IInput> = ({ value, onChange }) => {
   return (
     <Container>
-      <input type="number" defaultValue="25" />
+      <input
+        type="number"
+        onChange={(e) => onChange(Number(e.target.value))}
+        value={value}
+      />
       <InputButtons>
-        <InputButton>
+        <InputButton className="upButton" onClick={() => onChange(value + 5)}>
           <UpIcon />
         </InputButton>
-        <InputButton>
+        <InputButton
+          className="downButton"
+          onClick={() => onChange(Math.max(0, value - 5))}
+        >
           <DownIcon />
         </InputButton>
       </InputButtons>
