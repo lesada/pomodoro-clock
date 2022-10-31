@@ -5,7 +5,7 @@ import Input from "../Input";
 import { Modal, ModalHeader, IconClose, Option } from "./styles";
 
 interface ModalProps {
-  setSettingsOpen: any;
+  setSettingsOpen: (settings: boolean) => void;
 }
 
 const Settings: React.FC<ModalProps> = ({ setSettingsOpen }) => {
