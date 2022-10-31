@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Slider from "../Slider";
+import Switch from "../Switch";
 import Input from "../Input";
 
 import { Modal, ModalHeader, IconClose, Option } from "./styles";
@@ -42,7 +42,7 @@ const Settings: React.FC<ISettings> = ({ closeModal }) => {
       </ModalHeader>
       <Option>
         <p>Dark Mode</p>
-        <Slider
+        <Switch
           setIsChecked={(e) => setFieldValue("darkMode", e)}
           isChecked={values.darkMode}
         />
@@ -77,21 +77,21 @@ const Settings: React.FC<ISettings> = ({ closeModal }) => {
       </Option>
       <Option>
         <p>Auto resume timer</p>
-        <Slider
+        <Switch
           setIsChecked={(e) => setFieldValue("autoResume", e)}
           isChecked={values.autoResume}
         />
       </Option>
       <Option>
         <p>Sound</p>
-        <Slider
+        <Switch
           setIsChecked={(e) => setFieldValue("sound", e)}
           isChecked={values.sound}
         />
       </Option>
       <Option>
         <p>Notifications</p>
-        <Slider
+        <Switch
           setIsChecked={(e) => setFieldValue("notifications", e)}
           isChecked={values.notifications}
         />

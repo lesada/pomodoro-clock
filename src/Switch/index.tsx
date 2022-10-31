@@ -2,12 +2,12 @@ import React from "react";
 
 import { Container } from "./styles";
 
-interface ISlider {
+interface ISwitch {
   setIsChecked: (settings: boolean) => void;
   isChecked: boolean;
 }
 
-const Slider: React.FC<ISlider> = ({ isChecked, setIsChecked }) => {
+const Switch: React.FC<ISwitch> = ({ isChecked, setIsChecked }) => {
   return (
     <Container>
       <label className="switch">
@@ -16,10 +16,10 @@ const Slider: React.FC<ISlider> = ({ isChecked, setIsChecked }) => {
           checked={isChecked}
           onChange={() => setIsChecked(!isChecked)}
         />
-        <span className="slider round"></span>
+        <span className="Switch round"></span>
       </label>
     </Container>
   );
 };
 
-export default Slider;
+export default Switch;

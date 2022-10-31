@@ -14,7 +14,7 @@ export const Container = styled.div`
     display: none;
   }
 
-  .slider {
+  .Switch {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -26,7 +26,7 @@ export const Container = styled.div`
     transition: 0.2s;
   }
 
-  .slider:before {
+  .Switch:before {
     position: absolute;
     content: "";
     height: 15px;
@@ -38,26 +38,26 @@ export const Container = styled.div`
     transition: 0.2s;
   }
 
-  input:checked + .slider {
+  input:checked + .Switch {
     background-color: #2196f3;
   }
 
-  input:focus + .slider {
+  input:focus + .Switch {
     box-shadow: 0 0 1px #2196f3;
   }
 
-  input:checked + .slider:before {
+  input:checked + .Switch:before {
     -webkit-transform: translateX(18px);
     -ms-transform: translateX(18px);
     transform: translateX(18px);
   }
 
-  /* Rounded sliders */
-  .slider.round {
+  /* Rounded Switchs */
+  .Switch.round {
     border-radius: 34px;
   }
 
-  .slider.round:before {
+  .Switch.round:before {
     border-radius: 50%;
   }
 `;
