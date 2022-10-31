@@ -60,7 +60,7 @@ export const IconBreak = styled(Coffee)`
   height: 32px;
 `;
 
-export const Settings = styled.button`
+export const SettingsButton = styled.button`
   width: 80px;
   height: 80px;
   background-color: #ff4c4c26;

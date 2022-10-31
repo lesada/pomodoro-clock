@@ -6,7 +6,7 @@ import {
   CountDown,
   IconWorking,
   IconBreak,
-  Settings,
+  SettingsButton,
   MenuButtons,
   Start,
   Next,
@@ -16,7 +16,11 @@ import {
   IconPause,
 } from "./styles";
 
+import Settings from "../Settings";
+
 export const Timer: React.FC = () => {
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
   const interval: any = React.useRef();
   const focusTime: string = "25:00";
   const breakTime: string = "05:00";
@@ -74,6 +78,12 @@ export const Timer: React.FC = () => {
     stopTimer();
   };
 
+  const isModalOpen = () => {
+    if (setSettingsOpen) {
+      setSettingsOpen(true);
+    }
+  };
+
   return (
     <Container>
       <State>
@@ -82,9 +92,9 @@ export const Timer: React.FC = () => {
       </State>
       <CountDown className="countDown">{time}</CountDown>
       <MenuButtons>
-        <Settings>
+        <SettingsButton onClick={isModalOpen}>
           <IconSettings />
-        </Settings>
+        </SettingsButton>
         <Start
           onClick={() => {
             {
@@ -98,6 +108,7 @@ export const Timer: React.FC = () => {
           <IconNext />
         </Next>
       </MenuButtons>
+      {settingsOpen ? <Settings /> : null}
     </Container>
   );
 };
