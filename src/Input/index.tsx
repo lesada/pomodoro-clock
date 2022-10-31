@@ -11,7 +11,7 @@ import {
 const Input: React.FC = () => {
   return (
     <Container>
-      <input type="number" value="25" />
+      <input type="number" defaultValue="25" />
       <InputButtons>
         <InputButton>
           <UpIcon />

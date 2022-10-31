@@ -4,12 +4,16 @@ import Input from "../Input";
 
 import { Modal, ModalHeader, IconClose, Option } from "./styles";
 
-const Settings: React.FC = () => {
+interface ModalProps {
+  setSettingsOpen: any;
+}
+
+const Settings: React.FC<ModalProps> = ({ setSettingsOpen }) => {
   return (
     <Modal>
       <ModalHeader>
         <h2>Settings</h2>
-        <IconClose />
+        <IconClose onClick={() => setSettingsOpen(false)} />
       </ModalHeader>
       <Option>
         <p>Dark Mode</p>

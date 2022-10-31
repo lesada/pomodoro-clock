@@ -19,13 +19,13 @@ import {
 import Settings from "../Settings";
 
 export const Timer: React.FC = () => {
-  const [settingsOpen, setSettingsOpen] = useState(false);
-
-  const interval: any = React.useRef();
   const focusTime: string = "25:00";
   const breakTime: string = "05:00";
   const longBreakTime: string = "10:00";
 
+  const interval: any = React.useRef();
+
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [state, setState] = useState("Focus");
   const [time, setTime] = useState(focusTime);
   const [timerRuning, setTimerRuning] = useState(false);
@@ -60,7 +60,7 @@ export const Timer: React.FC = () => {
   };
 
   const skipTimer = () => {
-    if (state == "Focus") {
+    if (state === "Focus") {
       if (counting === 4) {
         setState("Long Break");
         setTime(longBreakTime);
@@ -70,7 +70,7 @@ export const Timer: React.FC = () => {
         setTime(breakTime);
       }
     }
-    if (state == "Short Break" || state == "Long Break") {
+    if (state === "Short Break" || state === "Long Break") {
       setTime(focusTime);
       setState("Focus");
       setCounting(counting + 1);
@@ -87,7 +87,7 @@ export const Timer: React.FC = () => {
   return (
     <Container>
       <State>
-        {state == "Focus" ? <IconWorking /> : <IconBreak />}
+        {state === "Focus" ? <IconWorking /> : <IconBreak />}
         {state}
       </State>
       <CountDown className="countDown">{time}</CountDown>
@@ -97,9 +97,7 @@ export const Timer: React.FC = () => {
         </SettingsButton>
         <Start
           onClick={() => {
-            {
-              timerRuning ? stopTimer() : startTimer();
-            }
+            timerRuning ? stopTimer() : startTimer();
           }}
         >
           {timerRuning ? <IconPause /> : <IconPlay />}
@@ -108,7 +106,7 @@ export const Timer: React.FC = () => {
           <IconNext />
         </Next>
       </MenuButtons>
-      {settingsOpen ? <Settings /> : null}
+      {settingsOpen ? <Settings setSettingsOpen={setSettingsOpen} /> : null}
     </Container>
   );
 };
