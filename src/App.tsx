@@ -2,6 +2,9 @@ import { Fragment } from "react";
 import GlobalStyle from "./globalStyles";
 import styled from "styled-components";
 import Timer from "./Timer";
+import Settings from "./Settings";
+
+let settingsOpen = false;
 
 function App() {
   return (
@@ -9,6 +12,7 @@ function App() {
       <GlobalStyle />
       <Wrapper>
         <Timer />
+        {settingsOpen ? <Settings /> : null}
       </Wrapper>
     </Fragment>
   );
