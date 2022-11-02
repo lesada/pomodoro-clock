@@ -7,10 +7,10 @@ import { useFormik } from "formik";
 
 interface ISettings {
   closeModal: () => void;
-  setForm: any;
+  sendForm: any;
 }
 
-const Settings: React.FC<ISettings> = ({ closeModal, setForm }) => {
+const Settings: React.FC<ISettings> = ({ sendForm, closeModal }) => {
   const { values, setFieldValue, handleSubmit } = useFormik({
     initialValues: {
       darkMode: false,
@@ -24,7 +24,7 @@ const Settings: React.FC<ISettings> = ({ closeModal, setForm }) => {
       longBreak: 10,
     },
     onSubmit: (val) => {
-      setForm(val);
+      sendForm(val);
     },
   });
 
@@ -38,7 +38,7 @@ const Settings: React.FC<ISettings> = ({ closeModal, setForm }) => {
     <Modal>
       <ModalHeader>
         <h2>Settings</h2>
-        <IconClose onClick={() => closeModal()} />
+        <IconClose onClick={() => closeModal()} type="submit" />
       </ModalHeader>
       <Option>
         <p>Dark Mode</p>

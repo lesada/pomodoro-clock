@@ -114,9 +114,10 @@ export const Timer: React.FC = () => {
       </MenuButtons>
       {settingsOpen && (
         <Settings
-          setForm={setForm}
+          sendForm={setForm}
           closeModal={() => {
             setSettingsOpen(false);
+            () => console.log(form);
           }}
         />
       )}
