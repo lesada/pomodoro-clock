@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Container,
@@ -19,17 +19,6 @@ import {
 import Settings from "../Settings";
 
 export const Timer: React.FC = () => {
-  const focusTime: string = "25:00";
-  const breakTime: string = "05:00";
-  const longBreakTime: string = "10:00";
-
-  const interval: any = React.useRef();
-
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const [state, setState] = useState("Focus");
-  const [time, setTime] = useState(focusTime);
-  const [timerRuning, setTimerRuning] = useState(false);
-  const [counting, setCounting] = useState(1);
   const [form, setForm] = useState({
     darkMode: false,
     autoResume: false,
@@ -41,6 +30,14 @@ export const Timer: React.FC = () => {
     shortBreak: 5,
     longBreak: 10,
   });
+
+  const interval: any = React.useRef();
+
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [state, setState] = useState("Focus");
+  const [time, setTime] = useState(form.focusLength + ":00");
+  const [timerRuning, setTimerRuning] = useState(false);
+  const [counting, setCounting] = useState(1);
 
   const timeArray: string[] | undefined = time?.split(":");
   const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
@@ -74,15 +71,15 @@ export const Timer: React.FC = () => {
     if (state === "Focus") {
       if (counting === 4) {
         setState("Long Break");
-        setTime(longBreakTime);
+        setTime(form.longBreak + ":00");
         setCounting(0);
       } else {
         setState("Short Break");
-        setTime(breakTime);
+        setTime(form.shortBreak + ":00");
       }
     }
     if (state === "Short Break" || state === "Long Break") {
-      setTime(focusTime);
+      setTime(form.focusLength + ":00");
       setState("Focus");
       setCounting(counting + 1);
     }
@@ -116,7 +113,12 @@ export const Timer: React.FC = () => {
         </Next>
       </MenuButtons>
       {settingsOpen && (
-        <Settings setForm={setForm} closeModal={() => setSettingsOpen(false)} />
+        <Settings
+          setForm={setForm}
+          closeModal={() => {
+            setSettingsOpen(false);
+          }}
+        />
       )}
     </Container>
   );
