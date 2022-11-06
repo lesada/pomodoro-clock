@@ -90,21 +90,13 @@ export const Timer: React.FC = () => {
     stopTimer();
   };
 
-  const isModalOpen = () => {
-    setSettingsOpen(true);
-  };
-
-  const updateValues = () => {
+  useEffect(() => {
     setState("Focus");
     setTime(form.focusLength + ":00");
     setFocusTime(form.focusLength + ":00");
     setShortBreak(form.shortBreak + ":00");
     setLongBreak(form.longBreak + ":00");
     setPomodorosUntil(form.pomodoros);
-  };
-
-  useEffect(() => {
-    updateValues();
   }, [form]);
 
   return (
@@ -115,7 +107,11 @@ export const Timer: React.FC = () => {
       </State>
       <CountDown className="countDown">{time}</CountDown>
       <MenuButtons>
-        <SettingsButton onClick={isModalOpen}>
+        <SettingsButton
+          onClick={() => {
+            setSettingsOpen(true);
+          }}
+        >
           <IconSettings />
         </SettingsButton>
         <Start
