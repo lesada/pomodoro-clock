@@ -92,10 +92,26 @@ export const Timer: React.FC = () => {
 
   useEffect(() => {
     setState("Focus");
-    setTime(form.focusLength + ":00");
-    setFocusTime(form.focusLength + ":00");
-    setShortBreak(form.shortBreak + ":00");
-    setLongBreak(form.longBreak + ":00");
+    setTime(
+      form.focusLength > 10
+        ? form.focusLength + ":00"
+        : "0" + form.focusLength + ":00"
+    );
+    setFocusTime(
+      form.focusLength > 10
+        ? form.focusLength + ":00"
+        : "0" + form.focusLength + ":00"
+    );
+    setShortBreak(
+      form.shortBreak > 10
+        ? form.shortBreak + ":00"
+        : "0" + form.shortBreak + ":00"
+    );
+    setLongBreak(
+      form.longBreak > 10
+        ? form.longBreak + ":00"
+        : "0" + form.longBreak + ":00"
+    );
     setPomodorosUntil(form.pomodoros);
   }, [form]);
 
