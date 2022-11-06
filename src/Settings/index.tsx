@@ -28,17 +28,17 @@ const Settings: React.FC<ISettings> = ({ sendForm, closeModal }) => {
     },
   });
 
-  useEffect(() => {
-    return () => {
-      handleSubmit();
-    };
-  }, []);
-
   return (
     <Modal>
       <ModalHeader>
         <h2>Settings</h2>
-        <IconClose onClick={() => closeModal()} type="submit" />
+        <IconClose
+          onClick={() => {
+            handleSubmit();
+            closeModal();
+          }}
+          type="submit"
+        />
       </ModalHeader>
       <Option>
         <p>Dark Mode</p>
