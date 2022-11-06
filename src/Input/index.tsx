@@ -18,16 +18,20 @@ const Input: React.FC<IInput> = ({ value, onChange }) => {
     <Container>
       <input
         type="number"
-        onChange={(e) => onChange(Number(e.target.value))}
+        onChange={(e) => onChange(Math.min(60, parseInt(e.target.value)))}
         value={value}
+        max={60}
       />
       <InputButtons>
-        <InputButton className="upButton" onClick={() => onChange(value + 5)}>
+        <InputButton
+          className="upButton"
+          onClick={() => onChange(Math.min(60, value + 5))}
+        >
           <UpIcon />
         </InputButton>
         <InputButton
           className="downButton"
-          onClick={() => onChange(Math.max(0, value - 5))}
+          onClick={() => onChange(Math.min(60, Math.max(0, value - 5)))}
         >
           <DownIcon />
         </InputButton>
