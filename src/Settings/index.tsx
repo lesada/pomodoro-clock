@@ -13,7 +13,7 @@ interface ISettings {
 const Settings: React.FC<ISettings> = ({ sendForm, closeModal }) => {
   const { values, setFieldValue, handleSubmit } = useFormik({
     initialValues: {
-      darkMode: false,
+      darkMode: true,
       autoResume: false,
       sound: false,
       notifications: false,

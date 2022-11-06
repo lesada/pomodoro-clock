@@ -38,11 +38,12 @@ export const Timer: React.FC = () => {
   const [focusTime, setFocusTime] = useState(form.focusLength + ":00");
   const [shortBreak, setShortBreak] = useState(form.shortBreak + ":00");
   const [longBreak, setLongBreak] = useState(form.longBreak + ":00");
+  const [pomodorosUntil, setPomodorosUntil] = useState(form.pomodoros);
   const [time, setTime] = useState(focusTime);
   const [timerRuning, setTimerRuning] = useState(false);
   const [counting, setCounting] = useState(1);
 
-  const timeArray: string[] | undefined = time?.split(":");
+  const timeArray: string[] = time?.split(":");
   const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
 
   const startTimer = () => {
@@ -72,7 +73,7 @@ export const Timer: React.FC = () => {
 
   const skipTimer = () => {
     if (state === "Focus") {
-      if (counting === 4) {
+      if (counting === pomodorosUntil) {
         setState("Long Break");
         setTime(longBreak);
         setCounting(0);
@@ -99,6 +100,7 @@ export const Timer: React.FC = () => {
     setFocusTime(form.focusLength + ":00");
     setShortBreak(form.shortBreak + ":00");
     setLongBreak(form.longBreak + ":00");
+    setPomodorosUntil(form.pomodoros);
   };
 
   useEffect(() => {
