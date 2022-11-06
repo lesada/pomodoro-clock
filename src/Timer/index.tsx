@@ -35,7 +35,10 @@ export const Timer: React.FC = () => {
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [state, setState] = useState("Focus");
-  const [time, setTime] = useState(form.focusLength + ":00");
+  const [focusTime, setFocusTime] = useState(form.focusLength + ":00");
+  const [shortBreak, setShortBreak] = useState(form.shortBreak + ":00");
+  const [longBreak, setLongBreak] = useState(form.longBreak + ":00");
+  const [time, setTime] = useState(focusTime);
   const [timerRuning, setTimerRuning] = useState(false);
   const [counting, setCounting] = useState(1);
 
@@ -71,15 +74,15 @@ export const Timer: React.FC = () => {
     if (state === "Focus") {
       if (counting === 4) {
         setState("Long Break");
-        setTime(form.longBreak + ":00");
+        setTime(longBreak);
         setCounting(0);
       } else {
         setState("Short Break");
-        setTime(form.shortBreak + ":00");
+        setTime(shortBreak);
       }
     }
     if (state === "Short Break" || state === "Long Break") {
-      setTime(form.focusLength + ":00");
+      setTime(focusTime);
       setState("Focus");
       setCounting(counting + 1);
     }
@@ -89,6 +92,18 @@ export const Timer: React.FC = () => {
   const isModalOpen = () => {
     setSettingsOpen(true);
   };
+
+  const updateValues = () => {
+    setState("Focus");
+    setTime(form.focusLength + ":00");
+    setFocusTime(form.focusLength + ":00");
+    setShortBreak(form.shortBreak + ":00");
+    setLongBreak(form.longBreak + ":00");
+  };
+
+  useEffect(() => {
+    updateValues();
+  }, [form]);
 
   return (
     <Container>
@@ -117,7 +132,6 @@ export const Timer: React.FC = () => {
           sendForm={setForm}
           closeModal={() => {
             setSettingsOpen(false);
-            () => console.log(form);
           }}
         />
       )}
