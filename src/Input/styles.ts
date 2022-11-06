@@ -40,9 +40,15 @@ export const InputButtons = styled.div`
 
 export const InputButton = styled.button`
   background-color: transparent;
-  border: 1px solid #ffffff26;
   flex: 1;
   width: 25px;
+  border-left: 2px solid #ffffff26;
+  &.upButton {
+    border-bottom: 1px solid #ffffff26;
+  }
+  &.downButton {
+    border-top: 1px solid #ffffff26;
+  }
 `;
 
 export const UpIcon = styled(UpArrow)`
