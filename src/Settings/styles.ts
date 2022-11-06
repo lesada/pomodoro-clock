@@ -14,6 +14,10 @@ export const Modal = styled.div`
   height: 80%;
   border-radius: 24px;
   border: 2px solid white;
+
+  &.closed {
+    display: none;
+  }
 `;
 
 export const ModalHeader = styled.div`

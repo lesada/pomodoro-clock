@@ -7,10 +7,11 @@ import { useFormik } from "formik";
 
 interface ISettings {
   closeModal: () => void;
+  className: string;
   sendForm: any;
 }
 
-const Settings: React.FC<ISettings> = ({ sendForm, closeModal }) => {
+const Settings: React.FC<ISettings> = ({ sendForm, closeModal, className }) => {
   const { values, setFieldValue, handleSubmit } = useFormik({
     initialValues: {
       darkMode: true,
@@ -29,7 +30,7 @@ const Settings: React.FC<ISettings> = ({ sendForm, closeModal }) => {
   });
 
   return (
-    <Modal>
+    <Modal className={className}>
       <ModalHeader>
         <h2>Settings</h2>
         <IconClose

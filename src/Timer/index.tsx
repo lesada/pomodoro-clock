@@ -129,14 +129,13 @@ export const Timer: React.FC = () => {
           <IconNext />
         </Next>
       </MenuButtons>
-      {settingsOpen && (
-        <Settings
-          sendForm={setForm}
-          closeModal={() => {
-            setSettingsOpen(false);
-          }}
-        />
-      )}
+      <Settings
+        className={!settingsOpen ? "closed" : ""}
+        sendForm={setForm}
+        closeModal={() => {
+          setSettingsOpen(false);
+        }}
+      />
     </Container>
   );
 };
