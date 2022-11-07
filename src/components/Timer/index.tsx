@@ -44,11 +44,15 @@ export const Timer: React.FC<ITimer> = ({ setIsDark }) => {
   const [longBreak, setLongBreak] = useState(form.longBreak + ":00");
   const [pomodorosUntil, setPomodorosUntil] = useState(form.pomodoros);
   const [resume, setResume] = useState(form.autoResume);
+  const [sound, setSound] = useState(form.sound);
   const [time, setTime] = useState(focusTime);
   const [timerRuning, setTimerRuning] = useState(false);
   const [counting, setCounting] = useState(1);
 
+  const audio = new Audio("/sounds/beep.mp3");
+
   const startTimer = (t: string) => {
+    if (sound) audio.play();
     let timeArray: string[];
     timeArray = t?.split(":");
 
@@ -74,6 +78,7 @@ export const Timer: React.FC<ITimer> = ({ setIsDark }) => {
   const stopTimer = () => {
     clearInterval(interval.current);
     setTimerRuning(false);
+    if (sound) audio.play();
   };
 
   const skipTimer = () => {
@@ -94,7 +99,10 @@ export const Timer: React.FC<ITimer> = ({ setIsDark }) => {
       setState("Focus");
       setTime(focusTime);
       setCounting(counting + 1);
-      if (resume) startTimer(focusTime);
+
+      if (resume) {
+        startTimer(focusTime);
+      }
     }
   };
 
@@ -123,6 +131,7 @@ export const Timer: React.FC<ITimer> = ({ setIsDark }) => {
     setPomodorosUntil(form.pomodoros);
     setResume(form.autoResume);
     setIsDark(form.darkMode);
+    setSound(form.sound);
   }, [form]);
 
   return (
