@@ -20,7 +20,7 @@ import Settings from "../Settings";
 
 export const Timer: React.FC = () => {
   const [form, setForm] = useState({
-    darkMode: false,
+    darkMode: true,
     autoResume: false,
     sound: false,
     notifications: false,
@@ -39,16 +39,17 @@ export const Timer: React.FC = () => {
   const [shortBreak, setShortBreak] = useState(form.shortBreak + ":00");
   const [longBreak, setLongBreak] = useState(form.longBreak + ":00");
   const [pomodorosUntil, setPomodorosUntil] = useState(form.pomodoros);
+  const [resume, setResume] = useState(form.autoResume);
   const [time, setTime] = useState(focusTime);
   const [timerRuning, setTimerRuning] = useState(false);
   const [counting, setCounting] = useState(1);
 
-  const timeArray: string[] = time?.split(":");
-  const duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
+  const startTimer = (t: string) => {
+    let timeArray: string[];
+    timeArray = t?.split(":");
 
-  const startTimer = () => {
     setTimerRuning(true);
-
+    let duration = parseInt(timeArray![0]) * 60 + parseInt(timeArray![1]) - 1;
     let timer: number = duration,
       minutes,
       seconds;
@@ -72,22 +73,25 @@ export const Timer: React.FC = () => {
   };
 
   const skipTimer = () => {
+    stopTimer();
+
     if (state === "Focus") {
       if (counting === pomodorosUntil) {
         setState("Long Break");
         setTime(longBreak);
         setCounting(0);
+        if (resume) startTimer(longBreak);
       } else {
         setState("Short Break");
         setTime(shortBreak);
+        if (resume) startTimer(shortBreak);
       }
-    }
-    if (state === "Short Break" || state === "Long Break") {
-      setTime(focusTime);
+    } else {
       setState("Focus");
+      setTime(focusTime);
       setCounting(counting + 1);
+      if (resume) startTimer(focusTime);
     }
-    stopTimer();
   };
 
   useEffect(() => {
@@ -113,6 +117,7 @@ export const Timer: React.FC = () => {
         : "0" + form.longBreak + ":00"
     );
     setPomodorosUntil(form.pomodoros);
+    setResume(form.autoResume);
   }, [form]);
 
   return (
@@ -132,7 +137,7 @@ export const Timer: React.FC = () => {
         </SettingsButton>
         <Start
           onClick={() => {
-            timerRuning ? stopTimer() : startTimer();
+            timerRuning ? stopTimer() : startTimer(time);
           }}
         >
           {timerRuning ? <IconPause /> : <IconPlay />}

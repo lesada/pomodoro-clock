@@ -15,7 +15,7 @@ const Settings: React.FC<ISettings> = ({ sendForm, closeModal, className }) => {
   const { values, setFieldValue, handleSubmit } = useFormik({
     initialValues: {
       darkMode: true,
-      autoResume: false,
+      autoResume: true,
       sound: false,
       notifications: false,
 
