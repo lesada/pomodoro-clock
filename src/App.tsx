@@ -1,7 +1,13 @@
 import { Fragment } from "react";
-import GlobalStyle from "./globalStyles";
+import GlobalStyle from "./styles/globalStyles";
 import styled from "styled-components";
-import Timer from "./Timer";
+import Timer from "./components/Timer";
+import { createContext } from "react";
+
+export const ThemeContext = createContext({
+  theme: "",
+  setTheme: (theme: string) => {},
+});
 
 function App() {
   return (
