@@ -17,7 +17,6 @@ const Settings: React.FC<ISettings> = ({ sendForm, closeModal, className }) => {
       darkMode: true,
       autoResume: true,
       sound: false,
-      notifications: false,
 
       focusLength: 25,
       pomodoros: 3,
@@ -88,13 +87,6 @@ const Settings: React.FC<ISettings> = ({ sendForm, closeModal, className }) => {
         <Switch
           setIsChecked={(e) => setFieldValue("sound", e)}
           isChecked={values.sound}
-        />
-      </Option>
-      <Option>
-        <p>Notifications</p>
-        <Switch
-          setIsChecked={(e) => setFieldValue("notifications", e)}
-          isChecked={values.notifications}
         />
       </Option>
     </Modal>

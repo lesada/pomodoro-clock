@@ -27,7 +27,6 @@ export const Timer: React.FC<ITimer> = ({ setIsDark }) => {
     darkMode: true,
     autoResume: false,
     sound: false,
-    notifications: false,
 
     focusLength: 25,
     pomodoros: 3,
@@ -78,6 +77,7 @@ export const Timer: React.FC<ITimer> = ({ setIsDark }) => {
   const stopTimer = () => {
     clearInterval(interval.current);
     setTimerRuning(false);
+
     if (sound) audio.play();
   };
 
