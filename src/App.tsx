@@ -1,22 +1,20 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import GlobalStyle from "./styles/globalStyles";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import Timer from "./components/Timer";
-import { createContext } from "react";
-
-export const ThemeContext = createContext({
-  theme: "",
-  setTheme: (theme: string) => {},
-});
+import { lightTheme, darkTheme } from "./styles/themes";
 
 function App() {
+  const [isDark, setIsDark] = useState(true);
   return (
-    <Fragment>
-      <GlobalStyle />
-      <Wrapper>
-        <Timer />
-      </Wrapper>
-    </Fragment>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <Fragment>
+        <GlobalStyle />
+        <Wrapper>
+          <Timer setIsDark={setIsDark} />
+        </Wrapper>
+      </Fragment>
+    </ThemeProvider>
   );
 }
 
@@ -28,4 +26,5 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: var(--background);
 `;

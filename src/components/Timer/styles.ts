@@ -9,7 +9,7 @@ import { Pause } from "@styled-icons/fa-solid/Pause";
 const iconCSS = css`
   height: 32px;
   width: 32px;
-  color: #ffd9d9;
+  color: var(--text);
 `;
 
 export const Container = styled.div`
@@ -31,9 +31,9 @@ export const State = styled.div`
 
   height: 48px;
 
-  background: #ff4c4c26;
+  background: var(--secondary);
 
-  border: 2px solid #fff2f2;
+  border: 2px solid var(--text);
   border-radius: 9999px;
 `;
 
@@ -63,7 +63,7 @@ export const IconBreak = styled(Coffee)`
 export const SettingsButton = styled.button`
   width: 80px;
   height: 80px;
-  background-color: #ff4c4c26;
+  background-color: var(--secondary);
   border: none;
   border-radius: 24px;
 `;
@@ -76,13 +76,13 @@ export const Start = styled.button`
   border-radius: 24px;
   width: 128px;
   height: 96px;
-  background-color: #ff4c4cb5;
+  background-color: var(--primary);
 `;
 
 export const Next = styled.button`
   width: 80px;
   height: 80px;
-  background-color: #ff4c4c26;
+  background-color: var(--secondary);
   border: none;
   border-radius: 24px;
 `;

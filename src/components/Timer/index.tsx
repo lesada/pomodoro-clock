@@ -18,7 +18,11 @@ import {
 
 import Settings from "../Settings";
 
-export const Timer: React.FC = () => {
+interface ITimer {
+  setIsDark: any;
+}
+
+export const Timer: React.FC<ITimer> = ({ setIsDark }) => {
   const [form, setForm] = useState({
     darkMode: true,
     autoResume: false,
@@ -118,6 +122,7 @@ export const Timer: React.FC = () => {
     );
     setPomodorosUntil(form.pomodoros);
     setResume(form.autoResume);
+    setIsDark(form.darkMode);
   }, [form]);
 
   return (

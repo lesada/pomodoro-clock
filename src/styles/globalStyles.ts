@@ -10,12 +10,24 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #0d0404;
-    color: #fff2f2;
+    color: var(--text);
   }
 
   button {
     cursor: pointer;
   }
+
+  :root {
+    ${(props) => {
+      const theme = props.theme;
+      let append = "";
+      Object.entries(theme).forEach(([prop, value]) => {
+        append += `--${prop}: ${value};`;
+      });
+      return append;
+    }}
+  }
+  
 `;
 
 export default GlobalStyle;

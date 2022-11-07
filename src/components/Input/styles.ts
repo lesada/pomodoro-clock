@@ -25,7 +25,7 @@ export const Container = styled.div`
     width: 100%;
     height: 100%;
     background-color: transparent;
-    color: #fff2f2;
+    color: var(--text);
     font-size: 16px;
     border: none;
     text-align: center;
@@ -52,9 +52,9 @@ export const InputButton = styled.button`
 `;
 
 export const UpIcon = styled(UpArrow)`
-  color: #fff2f2;
+  color: var(--text);
 `;
 
 export const DownIcon = styled(DownArrow)`
-  color: #fff2f2;
+  color: var(--text);
 `;

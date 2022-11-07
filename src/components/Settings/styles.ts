@@ -8,12 +8,12 @@ export const Modal = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  background-color: #0d0404;
+  background-color: var(--background);
   width: 400px;
   max-height: 500px;
   height: 85%;
   border-radius: 24px;
-  border: 2px solid white;
+  border: 2px solid var(--text);
 
   &.closed {
     display: none;
@@ -25,7 +25,7 @@ export const ModalHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   flex: 1.5;
-  color: #fff2f2;
+  color: var(--text);
   width: 400px;
 
   h2 {
