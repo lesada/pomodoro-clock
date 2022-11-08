@@ -8,7 +8,7 @@ export const Container = styled.div`
   width: 75px;
   height: 40px;
   margin: 0 25px;
-  border: 1px solid #ffffff26;
+  border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
 
@@ -42,12 +42,13 @@ export const InputButton = styled.button`
   background-color: transparent;
   flex: 1;
   width: 25px;
-  border-left: 2px solid #ffffff26;
+  border: none;
+  border-left: 2px solid var(--border);
   &.upButton {
-    border-bottom: 1px solid #ffffff26;
+    border-bottom: 1px solid var(--border);
   }
   &.downButton {
-    border-top: 1px solid #ffffff26;
+    border-top: 1px solid var(--border);
   }
 `;
 

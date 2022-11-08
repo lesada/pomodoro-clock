@@ -39,11 +39,11 @@ export const Container = styled.div`
   }
 
   input:checked + .Switch {
-    background-color: #2196f3;
+    background-color: var(--primary);
   }
 
   input:focus + .Switch {
-    box-shadow: 0 0 1px #2196f3;
+    box-shadow: 0 0 1px var(--primary);
   }
 
   input:checked + .Switch:before {
