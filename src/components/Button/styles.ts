@@ -7,6 +7,6 @@ export const Container = styled.button<{ variant: "primary" | "secondary" }>`
   font-size: 16px;
   cursor: pointer;
   color: white;
-  background-color: ${({ variant }) =>
-    variant === "primary" ? "blue" : "green"};
+  background-color: ${({ variant, theme }) =>
+    variant === "primary" ? theme.green[700] : theme.red[500]};
 `;
