@@ -1,4 +1,5 @@
 import { Minus, Play, Plus } from "phosphor-react";
+import { useForm } from "react-hook-form";
 
 import {
   Button,
@@ -13,17 +14,36 @@ import {
 } from "./styles";
 
 function Home() {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <Container>
-      <Form action="">
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Wrapper>
           <label htmlFor="task">I'll work on</label>
-          <TaskInput type="text" id="task" placeholder="Type your task here" />
+          <TaskInput
+            type="text"
+            id="task"
+            placeholder="Type your task here"
+            {...register("task")}
+          />
 
           <label htmlFor="minutesAmount">for</label>
           <NumberInputContainer>
             <Minus size={24} />
-            <NumberInput type="number" id="minutesAmount" step={5} max={60} />
+            <NumberInput
+              {...register("minutesAmount", {
+                valueAsNumber: true,
+              })}
+              id="minutesAmount"
+              type="number"
+              step={5}
+              max={60}
+            />
             <Plus size={24} />
           </NumberInputContainer>
 
