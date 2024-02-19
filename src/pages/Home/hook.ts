@@ -97,6 +97,18 @@ function useHome() {
     return () => clearInterval(interval);
   }, [activeCycle, activeCycleId, currentSeconds, setCycles]);
 
+  useEffect(() => {
+    if (cycles.length > 0) {
+      const lastCycle = cycles[cycles.length - 1];
+      if (!lastCycle.finishedDate && !lastCycle.interruptedDate) {
+        setActiveCycleId(lastCycle.id);
+        setAmountSecondsPassed(
+          differenceInSeconds(new Date(), lastCycle.startDate)
+        );
+      }
+    }
+  }, [cycles]);
+
   return {
     handleFormSubmit: handleSubmit(onSubmit),
     minutesAmount,
