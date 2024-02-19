@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { differenceInSeconds } from "date-fns";
 import { Minus, Play, Plus } from "phosphor-react";
 import { useForm } from "react-hook-form";
 
@@ -24,18 +25,19 @@ interface Cycle {
   id: string;
   task: string;
   minutesAmount: number;
+  startDate: Date;
 }
 
 function Home() {
   const [cycles, setCycles] = useState<Cycle[]>([]);
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
-  const [amountSecondsLeft, setAmountSecondsLeft] = useState(0);
+  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
 
   const { register, handleSubmit, watch, setValue, reset } =
     useForm<NewCycleFormData>({
       defaultValues: {
         task: "",
-        minutesAmount: 25,
+        minutesAmount: 0,
       },
     });
 
@@ -61,6 +63,7 @@ function Home() {
       id: String(new Date().getTime()),
       task: data.task,
       minutesAmount: data.minutesAmount,
+      startDate: new Date(),
     };
 
     setCycles([...cycles, newCycle]);
@@ -73,13 +76,25 @@ function Home() {
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
-  const currentSeconds = activeCycle ? totalSeconds - amountSecondsLeft : 0;
+  const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
 
   const minutesAmountLeft = Math.floor(currentSeconds / 60);
   const secondsAmountLeft = currentSeconds % 60;
 
   const minutes = String(minutesAmountLeft).padStart(2, "0");
   const seconds = String(secondsAmountLeft).padStart(2, "0");
+
+  useEffect(() => {
+    if (activeCycle) {
+      const interval = setInterval(() => {
+        setAmountSecondsPassed(
+          differenceInSeconds(new Date(), activeCycle.startDate)
+        );
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [activeCycle]);
 
   return (
     <Container>
