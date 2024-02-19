@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Minus, Play, Plus } from "phosphor-react";
 import { useForm } from "react-hook-form";
 
@@ -13,24 +15,29 @@ import {
   Wrapper,
 } from "./styles";
 
-type NewCycleFormData = {
+interface NewCycleFormData {
   task: string;
   minutesAmount: number;
-};
+}
+
+interface Cycle {
+  id: string;
+  task: string;
+  minutesAmount: number;
+}
 
 function Home() {
-  const { register, handleSubmit, watch, setValue } = useForm<NewCycleFormData>(
-    {
+  const [cycles, setCycles] = useState<Cycle[]>([]);
+  const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
+  const [amountSecondsLeft, setAmountSecondsLeft] = useState(0);
+
+  const { register, handleSubmit, watch, setValue, reset } =
+    useForm<NewCycleFormData>({
       defaultValues: {
         task: "",
         minutesAmount: 25,
       },
-    }
-  );
-
-  const onSubmit = (data: NewCycleFormData) => {
-    console.log(data);
-  };
+    });
 
   const task = watch("task");
   const minutesAmount = watch("minutesAmount");
@@ -48,6 +55,31 @@ function Home() {
       return setValue("minutesAmount", minutesAmount + 5);
     }
   };
+
+  const onSubmit = (data: NewCycleFormData) => {
+    const newCycle: Cycle = {
+      id: String(new Date().getTime()),
+      task: data.task,
+      minutesAmount: data.minutesAmount,
+    };
+
+    setCycles([...cycles, newCycle]);
+
+    setActiveCycleId(newCycle.id);
+
+    reset();
+  };
+
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
+
+  const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
+  const currentSeconds = activeCycle ? totalSeconds - amountSecondsLeft : 0;
+
+  const minutesAmountLeft = Math.floor(currentSeconds / 60);
+  const secondsAmountLeft = currentSeconds % 60;
+
+  const minutes = String(minutesAmountLeft).padStart(2, "0");
+  const seconds = String(secondsAmountLeft).padStart(2, "0");
 
   return (
     <Container>
@@ -79,11 +111,11 @@ function Home() {
           <span>minutes.</span>
         </Wrapper>
         <Countdown>
-          <span>0</span>
-          <span>0</span>
+          <span>{minutes[0]}</span>
+          <span>{minutes[1]}</span>
           <Separator>:</Separator>
-          <span>0</span>
-          <span>0</span>
+          <span>{seconds[0]}</span>
+          <span>{seconds[1]}</span>
         </Countdown>
         <Button type="submit" disabled={!hasValues}>
           <Play size={24} /> Start
