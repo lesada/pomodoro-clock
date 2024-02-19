@@ -100,7 +100,7 @@ export const Separator = styled.span`
   justify-content: center;
 `;
 
-export const Button = styled.button`
+const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,16 +113,27 @@ export const Button = styled.button`
   font-weight: 700;
   font-size: 1rem;
 
-  background-color: ${({ theme }) => theme.green[500]};
   color: ${({ theme }) => theme.gray[100]};
 
   transition: background-color 0.2s;
 
+  &:disabled {
+    opacity: 0.7;
+  }
+`;
+
+export const StartButton = styled(Button)`
+  background-color: ${({ theme }) => theme.green[500]};
+
   &:hover:not(:disabled) {
     background-color: ${({ theme }) => theme.green[700]};
   }
+`;
 
-  &:disabled {
-    opacity: 0.7;
+export const StopButton = styled(Button)`
+  background-color: ${({ theme }) => theme.red[500]};
+
+  &:hover:not(:disabled) {
+    background-color: ${({ theme }) => theme.red[700]};
   }
 `;

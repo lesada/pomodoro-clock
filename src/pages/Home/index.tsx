@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 
 import { differenceInSeconds } from "date-fns";
-import { Minus, Play, Plus } from "phosphor-react";
+import { HandPalm, Minus, Play, Plus } from "phosphor-react";
 import { useForm } from "react-hook-form";
 
 import {
-  Button,
   Container,
   Countdown,
   Form,
   NumberInput,
   NumberInputContainer,
   Separator,
+  StartButton,
+  StopButton,
   TaskInput,
   Wrapper,
 } from "./styles";
@@ -26,6 +27,8 @@ interface Cycle {
   task: string;
   minutesAmount: number;
   startDate: Date;
+  interruptedDate?: Date;
+  finishedDate?: Date;
 }
 
 function Home() {
@@ -83,6 +86,23 @@ function Home() {
   const minutes = String(minutesAmountLeft).padStart(2, "0");
   const seconds = String(secondsAmountLeft).padStart(2, "0");
 
+  const handleInterruptCycle = () => {
+    setCycles(
+      cycles.map((cycle) => {
+        if (cycle.id === activeCycleId) {
+          return {
+            ...cycle,
+            interruptedDate: new Date(),
+          };
+        }
+        return cycle;
+      })
+    );
+
+    setActiveCycleId(null);
+    setAmountSecondsPassed(0);
+  };
+
   useEffect(() => {
     let interval: number;
     if (activeCycle) {
@@ -91,9 +111,25 @@ function Home() {
           differenceInSeconds(new Date(), activeCycle.startDate)
         );
       }, 1000);
+
+      if (currentSeconds <= 0) {
+        setActiveCycleId(null);
+        setAmountSecondsPassed(0);
+        setCycles((prev) =>
+          prev.map((cycle) => {
+            if (cycle.id === activeCycleId) {
+              return {
+                ...cycle,
+                finishedDate: new Date(),
+              };
+            }
+            return cycle;
+          })
+        );
+      }
     }
     return () => clearInterval(interval);
-  }, [activeCycle]);
+  }, [activeCycle, activeCycleId, currentSeconds]);
 
   return (
     <Container>
@@ -114,7 +150,7 @@ function Home() {
               id="minutesAmount"
               type="number"
               max={60}
-              min={5}
+              min={1}
               {...register("minutesAmount", {
                 valueAsNumber: true,
               })}
@@ -131,9 +167,16 @@ function Home() {
           <span>{seconds[0]}</span>
           <span>{seconds[1]}</span>
         </Countdown>
-        <Button type="submit" disabled={!hasValues}>
-          <Play size={24} /> Start
-        </Button>
+        {activeCycle ? (
+          <StopButton type="button" onClick={handleInterruptCycle}>
+            <HandPalm size={24} />
+            Stop
+          </StopButton>
+        ) : (
+          <StartButton type="submit" disabled={!hasValues}>
+            <Play size={24} /> Start
+          </StartButton>
+        )}
       </Form>
     </Container>
   );
