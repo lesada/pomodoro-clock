@@ -14,11 +14,16 @@ import {
 } from "./styles";
 
 function Home() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm();
 
   const onSubmit = (data: any) => {
     console.log(data);
   };
+
+  const task = watch("task");
+  const minutesAmount = watch("minutesAmount");
+
+  const hasValues = task && minutesAmount;
 
   return (
     <Container>
@@ -30,6 +35,7 @@ function Home() {
             id="task"
             placeholder="Type your task here"
             {...register("task")}
+            required
           />
 
           <label htmlFor="minutesAmount">for</label>
@@ -43,6 +49,8 @@ function Home() {
               type="number"
               step={5}
               max={60}
+              defaultValue={25}
+              required
             />
             <Plus size={24} />
           </NumberInputContainer>
@@ -56,7 +64,7 @@ function Home() {
           <span>0</span>
           <span>0</span>
         </Countdown>
-        <Button type="submit">
+        <Button type="submit" disabled={!hasValues}>
           <Play size={24} /> Start
         </Button>
       </Form>
