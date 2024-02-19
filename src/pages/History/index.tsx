@@ -1,6 +1,19 @@
+import { formatDistanceToNow } from "date-fns";
+
+import useCycles from "@/contexts/cycles";
+import { Cycle } from "@/interfaces/cycle";
+
 import { Container, List, Status, Title } from "./styles";
 
 function History() {
+  const { cycles } = useCycles();
+
+  function getCycleStatus(cycle: Cycle) {
+    if (cycle.interruptedDate) return "interrupted";
+    if (cycle.finishedDate) return "completed";
+    return "pending";
+  }
+
   return (
     <Container>
       <Title>My history</Title>
@@ -15,22 +28,20 @@ function History() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Task 1</td>
-              <td>00:25:00</td>
-              <td>2021-05-26 14:00:00</td>
-              <td>
-                <Status $status="completed">Completed</Status>
-              </td>
-            </tr>
-            <tr>
-              <td>Task 1</td>
-              <td>00:25:00</td>
-              <td>2021-05-26 14:00:00</td>
-              <td>
-                <Status $status="interrupted">Interrupted</Status>
-              </td>
-            </tr>
+            {cycles.map((cycle) => (
+              <tr key={cycle.id}>
+                <td>{cycle.task}</td>
+                <td>{cycle.minutesAmount} minutes</td>
+                <td>
+                  {formatDistanceToNow(cycle.startDate, { addSuffix: true })}
+                </td>
+                <td>
+                  <Status $status={getCycleStatus(cycle)}>
+                    {getCycleStatus(cycle)}
+                  </Status>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </List>

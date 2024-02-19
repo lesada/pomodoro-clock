@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import { differenceInSeconds } from "date-fns";
 import { useForm } from "react-hook-form";
 
-import { Cycle, NewCycleFormData } from "./interfaces";
+import useCycles from "@/contexts/cycles";
+import { Cycle } from "@/interfaces/cycle";
+
+import { NewCycleFormData } from "./interfaces";
 
 function useHome() {
-  const [cycles, setCycles] = useState<Cycle[]>([]);
+  const { cycles, setCycles } = useCycles();
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
 
@@ -92,7 +95,7 @@ function useHome() {
       }
     }
     return () => clearInterval(interval);
-  }, [activeCycle, activeCycleId, currentSeconds]);
+  }, [activeCycle, activeCycleId, currentSeconds, setCycles]);
 
   return {
     handleFormSubmit: handleSubmit(onSubmit),
