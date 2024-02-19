@@ -13,10 +13,22 @@ import {
   Wrapper,
 } from "./styles";
 
-function Home() {
-  const { register, handleSubmit, watch } = useForm();
+type NewCycleFormData = {
+  task: string;
+  minutesAmount: number;
+};
 
-  const onSubmit = (data: any) => {
+function Home() {
+  const { register, handleSubmit, watch, setValue } = useForm<NewCycleFormData>(
+    {
+      defaultValues: {
+        task: "",
+        minutesAmount: 25,
+      },
+    }
+  );
+
+  const onSubmit = (data: NewCycleFormData) => {
     console.log(data);
   };
 
@@ -24,6 +36,18 @@ function Home() {
   const minutesAmount = watch("minutesAmount");
 
   const hasValues = task && minutesAmount;
+
+  const reduceFiveMinutes = () => {
+    if (minutesAmount > 5) {
+      return setValue("minutesAmount", minutesAmount - 5);
+    }
+  };
+
+  const increaseFiveMinutes = () => {
+    if (minutesAmount <= 55) {
+      return setValue("minutesAmount", minutesAmount + 5);
+    }
+  };
 
   return (
     <Container>
@@ -35,24 +59,21 @@ function Home() {
             id="task"
             placeholder="Type your task here"
             {...register("task")}
-            required
           />
 
           <label htmlFor="minutesAmount">for</label>
           <NumberInputContainer>
-            <Minus size={24} />
+            <Minus size={24} onClick={reduceFiveMinutes} />
             <NumberInput
+              id="minutesAmount"
+              type="number"
+              max={60}
+              min={5}
               {...register("minutesAmount", {
                 valueAsNumber: true,
               })}
-              id="minutesAmount"
-              type="number"
-              step={5}
-              max={60}
-              defaultValue={25}
-              required
             />
-            <Plus size={24} />
+            <Plus size={24} onClick={increaseFiveMinutes} />
           </NumberInputContainer>
 
           <span>minutes.</span>
