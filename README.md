@@ -19,7 +19,7 @@
 
 - [NodeJS](https://nodejs.org/en)
 - [Git](https://git-scm.com/)
-- [Yarn](https://yarnpkg.com/) (optional)
+- [Yarn](https://yarnpkg.com/) _(optional)_
 
 ### Clone the application
 
