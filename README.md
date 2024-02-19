@@ -15,11 +15,11 @@
 
 ## 🚀 Getting started
 
-###Prerequisites
+### Requisites
 
-- NodeJS
-- Git
-- Yarn (optional)
+- [NodeJS](https://nodejs.org/en)
+- [Git](https://git-scm.com/)
+- [Yarn](https://yarnpkg.com/) (optional)
 
 ### Clone the application
 
