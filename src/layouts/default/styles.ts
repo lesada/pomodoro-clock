@@ -18,6 +18,7 @@ export const LayoutContainer = styled.div`
   max-width: 74rem;
   width: 100%;
   height: 100%;
+  min-height: 36rem;
 
   background-color: ${({ theme }) => theme.gray[800]};
   border-radius: 8px;

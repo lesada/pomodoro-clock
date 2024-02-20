@@ -4,12 +4,14 @@ import DefaultLayout from "@/layouts/default";
 import History from "@/pages/History";
 import Home from "@/pages/Home";
 
+import { RoutesPaths } from "./routesPaths";
+
 function Routes() {
   return (
     <Router>
-      <Route path="/" element={<DefaultLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/history" element={<History />} />
+      <Route path={RoutesPaths.BASE} element={<DefaultLayout />}>
+        <Route path={RoutesPaths.HOME} element={<Home />} />
+        <Route path={RoutesPaths.HISTORY} element={<History />} />
       </Route>
     </Router>
   );
