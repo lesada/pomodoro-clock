@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { Cycle } from "@/interfaces/cycle";
 
@@ -15,6 +15,16 @@ export function CycleContextProvider({
   children: React.ReactNode;
 }) {
   const [cycles, setCycles] = useState<Cycle[]>([]);
+
+  useEffect(() => {
+    const cycles = JSON.parse(localStorage.getItem("@pomodoro/cycles") || "[]");
+    setCycles(cycles);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("@pomodoro/cycles", JSON.stringify(cycles));
+  }, [cycles]);
+
   return (
     <CyclesContext.Provider value={{ cycles, setCycles }}>
       {children}

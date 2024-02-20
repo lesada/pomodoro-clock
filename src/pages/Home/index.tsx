@@ -1,11 +1,13 @@
 import { HandPalm, Play } from "phosphor-react";
 import { FormProvider } from "react-hook-form";
 
+import Button from "@/components/Button";
+
 import Countdown from "./components/Countdown";
 import NewCycle from "./components/NewCycle";
 import useHome from "./hook";
 
-import { Container, Form, StartButton, StopButton } from "./styles";
+import { Container, Form } from "./styles";
 
 function Home() {
   const {
@@ -26,14 +28,18 @@ function Home() {
           <NewCycle minutesAmount={minutesAmount} />
           <Countdown minutes={minutes} seconds={seconds} />
           {activeCycle ? (
-            <StopButton type="button" onClick={handleInterruptCycle}>
+            <Button
+              type="button"
+              onClick={handleInterruptCycle}
+              variant="danger"
+            >
               <HandPalm size={24} />
               Stop
-            </StopButton>
+            </Button>
           ) : (
-            <StartButton type="submit" disabled={!hasValues}>
+            <Button type="submit" disabled={!hasValues}>
               <Play size={24} /> Start
-            </StartButton>
+            </Button>
           )}
         </FormProvider>
       </Form>

@@ -1,17 +1,24 @@
 import { formatDistanceToNow } from "date-fns";
+import { Trash } from "phosphor-react";
 
+import Button from "@/components/Button";
 import useCycles from "@/contexts/cycles";
 import { Cycle } from "@/interfaces/cycle";
 
 import { Container, List, Status, Title } from "./styles";
 
 function History() {
-  const { cycles } = useCycles();
+  const { cycles, setCycles } = useCycles();
 
   function getCycleStatus(cycle: Cycle) {
     if (cycle.interruptedDate) return "interrupted";
     if (cycle.finishedDate) return "completed";
     return "pending";
+  }
+
+  function clearCycles() {
+    localStorage.removeItem("@pomodoro/cycles");
+    setCycles([]);
   }
 
   return (
@@ -45,6 +52,10 @@ function History() {
           </tbody>
         </table>
       </List>
+      <Button variant="danger" disabled={!cycles.length} onClick={clearCycles}>
+        <Trash size={24} />
+        Clear history
+      </Button>
     </Container>
   );
 }
