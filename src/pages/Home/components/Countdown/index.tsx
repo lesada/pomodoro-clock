@@ -1,4 +1,4 @@
-import { Container, Separator } from "./styles";
+import { Container, Dot, Group, Separator } from "./styles";
 
 interface CountdownProps {
   minutes: string;
@@ -8,11 +8,18 @@ interface CountdownProps {
 function Countdown({ minutes, seconds }: CountdownProps) {
   return (
     <Container>
-      <span>{minutes[0]}</span>
-      <span>{minutes[1]}</span>
-      <Separator>:</Separator>
-      <span>{seconds[0]}</span>
-      <span>{seconds[1]}</span>
+      <Group>
+        <span>{minutes[0]}</span>
+        <span>{minutes[1]}</span>
+      </Group>
+      <Separator>
+        <Dot />
+        <Dot />
+      </Separator>
+      <Group>
+        <span>{seconds[0]}</span>
+        <span>{seconds[1]}</span>
+      </Group>
     </Container>
   );
 }

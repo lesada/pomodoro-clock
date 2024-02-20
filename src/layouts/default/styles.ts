@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import breakpoints from "@/constants/breakpoints";
+
 export const Background = styled.div`
   display: flex;
   align-items: center;
@@ -9,6 +11,10 @@ export const Background = styled.div`
   height: 100vh;
 
   padding: 5rem;
+
+  @media screen and (max-width: ${breakpoints.sm}) {
+    padding: 0;
+  }
 `;
 
 export const LayoutContainer = styled.div`
@@ -17,8 +23,8 @@ export const LayoutContainer = styled.div`
 
   max-width: 74rem;
   width: 100%;
-  height: 100%;
   min-height: 36rem;
+  height: fit-content;
 
   background-color: ${({ theme }) => theme.gray[800]};
   border-radius: 8px;
