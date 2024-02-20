@@ -12,7 +12,7 @@ function Header() {
     <Container>
       <img src={logo} alt="" />
       <nav>
-        <NavLink to={RoutesPaths.HOME} title="Timer">
+        <NavLink to={RoutesPaths.HOME} title="Timer" end>
           <Timer size={24} />
         </NavLink>
         <NavLink to={RoutesPaths.HISTORY} title="History">
