@@ -96,7 +96,7 @@ Error generating stack: `+o.message+`
       }
     }
   }
-`;function Ug(){return D.jsxs(Wg,{children:[D.jsx("img",{src:Vg,alt:""}),D.jsxs("nav",{children:[D.jsx(Jc,{to:vr.HOME,title:"Timer",children:D.jsx(zg,{size:24})}),D.jsx(Jc,{to:vr.HISTORY,title:"History",children:D.jsx($g,{size:24})})]})]})}const Bg=ye.div`
+`;function Ug(){return D.jsxs(Wg,{children:[D.jsx("img",{src:Vg,alt:""}),D.jsxs("nav",{children:[D.jsx(Jc,{to:vr.HOME,title:"Timer",end:!0,children:D.jsx(zg,{size:24})}),D.jsx(Jc,{to:vr.HISTORY,title:"History",children:D.jsx($g,{size:24})})]})]})}const Bg=ye.div`
   display: flex;
   align-items: center;
   justify-content: center;
