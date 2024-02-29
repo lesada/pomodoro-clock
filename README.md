@@ -23,7 +23,7 @@
 
 ### Clone the application
 
-`$ git clone https://github.com/lesada/notes.git`
+`$ git clone https://github.com/lesada/pomodoro-clock.git`
 
 ### Running the project
 
